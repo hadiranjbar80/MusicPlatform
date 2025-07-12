@@ -9,6 +9,7 @@ namespace Domain.Models
         public string Title { get; set; }
         public string Cover { get; set; }
         public DateOnly ReleaseDate { get; set; }
+            = DateOnly.Parse(DateTime.Now.Date.ToString("yyyy-MM-dd"));
         public TimeOnly Duration { get; set; }
 
         // Navigation props

@@ -4,11 +4,12 @@ namespace Domain.Models
 {
     public class Album
     {
-        public int Id { get; set; }
+        public int Id { get; set; } 
         public int ArtistId { get; set; }
         public string Title { get; set; }
         public string Cover { get; set; }
         public DateOnly ReleaseDate { get; set; }
+            = DateOnly.Parse(DateTime.Now.Date.ToString("yyyy-MM-dd"));
 
         // Navigation props
         [ForeignKey("ArtistId")]
