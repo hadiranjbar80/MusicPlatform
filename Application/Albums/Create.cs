@@ -47,7 +47,7 @@ namespace Application.Albums
 
                         Title = request.Album.Title,
                         Cover = coverName,
-                        ArtistId = request.Album.ArtistId
+                        //ArtistId = request.Album.ArtistId
                     };
                     _context.Albums.Add(album);
 
