@@ -8,6 +8,7 @@ namespace Domain.Models
         public int AlbumId { get; set; }
         public string Title { get; set; }
         public string Cover { get; set; }
+        public string Attachment { get; set; }
         public DateOnly ReleaseDate { get; set; }
             = DateOnly.Parse(DateTime.Now.Date.ToString("yyyy-MM-dd"));
         public TimeOnly Duration { get; set; }

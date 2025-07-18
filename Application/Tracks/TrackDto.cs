@@ -7,6 +7,7 @@ namespace Application.Tracks
         public int AlbumId { get; set; }
         public string Title { get; set; }
         public IFormFile Cover { get; set; }
+        public IFormFile Attachment { get; set; }
         public TimeOnly Duration  { get; set; }
     }
 }

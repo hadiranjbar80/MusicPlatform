@@ -24,25 +24,34 @@ namespace Application.Tracks
             {
                 if (request.Track.Cover.Length > 0)
                 {
-                    var coverName = Untilities.UploadFile(request.Track.Cover,
-                        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", "Cover"));
-
-                    var track = new Track
+                    if (request.Track.Attachment.Length > 0)
                     {
-                        AlbumId = request.Track.AlbumId,
-                        Cover = coverName,
-                        Title = request.Track.Title,
-                        Duration = request.Track.Duration
-                    };
-                    _context.Tracks.Add(track);
-                    var result = await _context.SaveChangesAsync() > 0;
+                        var coverName = Untilities.UploadFile(request.Track.Cover,
+                            Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", "Cover"));
 
-                    if (!result) return Result<Unit>.Failure("Failed to add track");
+                        var attachment = Untilities.UploadFile(request.Track.Attachment,
+                            Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", "Attachment"));
 
-                    return Result<Unit>.Success(Unit.Value);
+                        var track = new Track
+                        {
+                            AlbumId = request.Track.AlbumId,
+                            Cover = coverName,
+                            Title = request.Track.Title,
+                            Duration = request.Track.Duration,
+                            Attachment = attachment
+                        };
+                        _context.Tracks.Add(track);
+                        var result = await _context.SaveChangesAsync() > 0;
+
+                        if (!result) return Result<Unit>.Failure("Failed to add track");
+
+                        return Result<Unit>.Success(Unit.Value);
+                    }
+
+                    return Result<Unit>.Failure("Please choose the song you want to upload");
                 }
 
-                return Result<Unit>.Failure("Please choose a cover for album");
+                return Result<Unit>.Failure("Please choose a cover for the song");
             }
         }
     }
