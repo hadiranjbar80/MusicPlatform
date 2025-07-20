@@ -8,6 +8,7 @@ namespace Domain.Models
         public string UserId { get; set; }
         public string Title { get; set; }
         public string Cover { get; set; }
+        public AlbumType Type { get; set; } = AlbumType.Single;
         public DateOnly ReleaseDate { get; set; }
             = DateOnly.Parse(DateTime.Now.Date.ToString("yyyy-MM-dd"));
 

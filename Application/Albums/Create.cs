@@ -44,10 +44,10 @@ namespace Application.Albums
 
                     var album = new Album
                     {
-
                         Title = request.Album.Title,
                         Cover = coverName,
-                        //ArtistId = request.Album.ArtistId
+                        UserId = request.Album.UserId,
+                        Type = request.Album.Type
                     };
                     _context.Albums.Add(album);
 

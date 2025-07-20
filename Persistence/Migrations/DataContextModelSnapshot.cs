@@ -43,6 +43,9 @@ namespace Persistence.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -73,7 +76,12 @@ namespace Persistence.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Playlists");
                 });
@@ -100,6 +108,9 @@ namespace Persistence.Migrations
                     b.Property<TimeOnly>("Duration")
                         .HasColumnType("time");
 
+                    b.Property<int>("Plays")
+                        .HasColumnType("int");
+
                     b.Property<DateOnly>("ReleaseDate")
                         .HasColumnType("date");
 
@@ -108,9 +119,14 @@ namespace Persistence.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AlbumId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Tracks");
                 });
@@ -353,6 +369,15 @@ namespace Persistence.Migrations
                     b.Navigation("AppUser");
                 });
 
+            modelBuilder.Entity("Domain.Models.Playlist", b =>
+                {
+                    b.HasOne("Domain.Models.AppUser", "User")
+                        .WithMany("Playlists")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Domain.Models.Track", b =>
                 {
                     b.HasOne("Domain.Models.Album", "Album")
@@ -361,7 +386,13 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Models.AppUser", "User")
+                        .WithMany("Tracks")
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Album");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Models.TrackPlaylist", b =>
@@ -448,6 +479,10 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Models.AppUser", b =>
                 {
                     b.Navigation("Albums");
+
+                    b.Navigation("Playlists");
+
+                    b.Navigation("Tracks");
                 });
 #pragma warning restore 612, 618
         }
