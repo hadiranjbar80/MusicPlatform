@@ -16,5 +16,11 @@ namespace API.Controllers
         {
             return HandleResult(await Mediator.Send(new AddToPlaylist.Command { PlaylistItem = playlistItem }));
         }
+        
+        [HttpDelete("/api/playlist/RemoveFromPlaylist")]
+        public async Task<IActionResult> RemoveFromPlaylist(AddToPlaylistDto playlistItem)
+        {
+            return HandleResult(await Mediator.Send(new RemoveFromPlaylist.Command { PlaylistItem = playlistItem }));
+        }
     }
 }

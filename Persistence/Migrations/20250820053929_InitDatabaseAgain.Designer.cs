@@ -12,8 +12,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250718123442_PlayAndTypeFiledsAdded")]
-    partial class PlayAndTypeFiledsAdded
+    [Migration("20250820053929_InitDatabaseAgain")]
+    partial class InitDatabaseAgain
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -79,7 +79,12 @@ namespace Persistence.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Playlists");
                 });
@@ -117,9 +122,14 @@ namespace Persistence.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AlbumId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Tracks");
                 });
@@ -164,6 +174,20 @@ namespace Persistence.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "f217ebed-fbba-40cb-aa32-a1e00b6d545c",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "4d69828d-9b60-49bc-b30c-fcdd285f220a",
+                            Name = "Artist",
+                            NormalizedName = "ARTIST"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -362,6 +386,15 @@ namespace Persistence.Migrations
                     b.Navigation("AppUser");
                 });
 
+            modelBuilder.Entity("Domain.Models.Playlist", b =>
+                {
+                    b.HasOne("Domain.Models.AppUser", "User")
+                        .WithMany("Playlists")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Domain.Models.Track", b =>
                 {
                     b.HasOne("Domain.Models.Album", "Album")
@@ -370,7 +403,13 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Models.AppUser", "User")
+                        .WithMany("Tracks")
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Album");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Models.TrackPlaylist", b =>
@@ -457,6 +496,10 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Models.AppUser", b =>
                 {
                     b.Navigation("Albums");
+
+                    b.Navigation("Playlists");
+
+                    b.Navigation("Tracks");
                 });
 #pragma warning restore 612, 618
         }

@@ -10,5 +10,11 @@ namespace API.Controllers
         {
             return HandleResult(await Mediator.Send(new Create.Command { Track = track }));
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteTrack(DeleteTrackDto trackDto)
+        {
+            return HandleResult(await Mediator.Send(new Delete.Command { TrackDto = trackDto }));
+        }
     }
 }

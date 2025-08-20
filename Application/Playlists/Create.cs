@@ -30,7 +30,8 @@ namespace Application.Playlists
                     var playlist = new Playlist
                     {
                         Cover = coverName,
-                        Title = request.Playlist.Title
+                        Title = request.Playlist.Title,
+                        UserId = request.Playlist.UserId
                     };
                     _context.Playlists.Add(playlist);
                     var result = await _context.SaveChangesAsync() > 0;

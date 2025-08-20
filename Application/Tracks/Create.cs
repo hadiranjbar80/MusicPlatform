@@ -38,7 +38,8 @@ namespace Application.Tracks
                             Cover = coverName,
                             Title = request.Track.Title,
                             Duration = request.Track.Duration,
-                            Attachment = attachment
+                            Attachment = attachment,
+                            UserId = request.Track.UserId
                         };
                         _context.Tracks.Add(track);
                         var result = await _context.SaveChangesAsync() > 0;

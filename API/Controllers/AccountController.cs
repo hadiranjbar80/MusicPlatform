@@ -43,7 +43,8 @@ namespace API.Controllers
 
             if (result.Succeeded)
             {
-                // Todo: Add user to role
+                await _userManager.AddToRoleAsync(user, "User");
+                return null;
             }
 
             return BadRequest(result.Errors);

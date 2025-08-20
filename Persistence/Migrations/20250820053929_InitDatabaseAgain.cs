@@ -3,32 +3,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class AddIdentityTables : Migration
+    public partial class InitDatabaseAgain : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Albums_Artists_ArtistId",
-                table: "Albums");
-
-            migrationBuilder.AlterColumn<int>(
-                name: "ArtistId",
-                table: "Albums",
-                type: "int",
-                nullable: true,
-                oldClrType: typeof(int),
-                oldType: "int");
-
-            migrationBuilder.AddColumn<string>(
-                name: "UserId",
-                table: "Albums",
-                type: "nvarchar(450)",
-                nullable: true);
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -88,6 +72,28 @@ namespace Persistence.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Albums",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Cover = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    ReleaseDate = table.Column<DateOnly>(type: "date", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Albums", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Albums_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -175,6 +181,91 @@ namespace Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Playlists",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Cover = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    CreationDate = table.Column<DateOnly>(type: "date", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Playlists", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Playlists_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tracks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AlbumId = table.Column<int>(type: "int", nullable: false),
+                    Plays = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Cover = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Attachment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ReleaseDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    Duration = table.Column<TimeOnly>(type: "time", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tracks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Tracks_Albums_AlbumId",
+                        column: x => x.AlbumId,
+                        principalTable: "Albums",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Tracks_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TrackPlaylists",
+                columns: table => new
+                {
+                    PlaylistId = table.Column<int>(type: "int", nullable: false),
+                    TrackId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TrackPlaylists", x => new { x.TrackId, x.PlaylistId });
+                    table.ForeignKey(
+                        name: "FK_TrackPlaylists_Playlists_PlaylistId",
+                        column: x => x.PlaylistId,
+                        principalTable: "Playlists",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TrackPlaylists_Tracks_TrackId",
+                        column: x => x.TrackId,
+                        principalTable: "Tracks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "4d69828d-9b60-49bc-b30c-fcdd285f220a", null, "Artist", "ARTIST" },
+                    { "f217ebed-fbba-40cb-aa32-a1e00b6d545c", null, "User", "USER" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Albums_UserId",
                 table: "Albums",
@@ -219,32 +310,30 @@ namespace Persistence.Migrations
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Albums_Artists_ArtistId",
-                table: "Albums",
-                column: "ArtistId",
-                principalTable: "Artists",
-                principalColumn: "Id");
+            migrationBuilder.CreateIndex(
+                name: "IX_Playlists_UserId",
+                table: "Playlists",
+                column: "UserId");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Albums_AspNetUsers_UserId",
-                table: "Albums",
-                column: "UserId",
-                principalTable: "AspNetUsers",
-                principalColumn: "Id");
+            migrationBuilder.CreateIndex(
+                name: "IX_TrackPlaylists_PlaylistId",
+                table: "TrackPlaylists",
+                column: "PlaylistId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tracks_AlbumId",
+                table: "Tracks",
+                column: "AlbumId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tracks_UserId",
+                table: "Tracks",
+                column: "UserId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Albums_Artists_ArtistId",
-                table: "Albums");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Albums_AspNetUsers_UserId",
-                table: "Albums");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -261,36 +350,22 @@ namespace Persistence.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "TrackPlaylists");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Playlists");
+
+            migrationBuilder.DropTable(
+                name: "Tracks");
+
+            migrationBuilder.DropTable(
+                name: "Albums");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Albums_UserId",
-                table: "Albums");
-
-            migrationBuilder.DropColumn(
-                name: "UserId",
-                table: "Albums");
-
-            migrationBuilder.AlterColumn<int>(
-                name: "ArtistId",
-                table: "Albums",
-                type: "int",
-                nullable: false,
-                defaultValue: 0,
-                oldClrType: typeof(int),
-                oldType: "int",
-                oldNullable: true);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Albums_Artists_ArtistId",
-                table: "Albums",
-                column: "ArtistId",
-                principalTable: "Artists",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
         }
     }
 }

@@ -171,6 +171,20 @@ namespace Persistence.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "f217ebed-fbba-40cb-aa32-a1e00b6d545c",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "4d69828d-9b60-49bc-b30c-fcdd285f220a",
+                            Name = "Artist",
+                            NormalizedName = "ARTIST"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

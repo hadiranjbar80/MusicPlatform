@@ -1,15 +1,15 @@
 using Application.Core;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.Playlists
 {
-    public class Delete
+    public class RemoveFromPlaylist
     {
-         public class Command : IRequest<Result<Unit>>
+        public class Command : IRequest<Result<Unit>>
         {
-            public string UserId { get; set; }
-            public int PlaylistId { get; set; }
+            public AddToPlaylistDto PlaylistItem { get; set; }
         }
 
         public class Handler : IRequestHandler<Command, Result<Unit>>
@@ -22,21 +22,21 @@ namespace Application.Playlists
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                if (_context.Tracks.Any(x => x.Id == request.PlaylistId &&
-                    x.UserId == request.UserId))
-                {
-                    var playList = _context.Albums.FindAsync(request.PlaylistId);
+                var playlistItem = await _context.TrackPlaylists.FirstOrDefaultAsync
+                    (x => x.TrackId == request.PlaylistItem.TrackId && x.PlaylistId == request.PlaylistItem.PlaylistId);
 
-                    _context.Remove(playList);
+                if (playlistItem != null)
+                {
+                    _context.Remove(playlistItem);
                     var result = await _context.SaveChangesAsync() > 0;
 
                     if (!result)
-                        return Result<Unit>.Failure("Failed to delete the playlist");
+                        return Result<Unit>.Failure("Faild to remove the track");
 
                     return Result<Unit>.Success(Unit.Value);
                 }
 
-                return Result<Unit>.Failure("No Playlist found");
+                return Result<Unit>.Failure("Trackk not found");
             }
         }
     }

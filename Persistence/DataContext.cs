@@ -1,5 +1,6 @@
 using Domain.EntityMapper;
 using Domain.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,7 +19,14 @@ namespace Persistence
             modelBuilder.ApplyConfiguration(new TrackMap());
             modelBuilder.ApplyConfiguration(new PlaylistMap());
             modelBuilder.ApplyConfiguration(new TrackPlaylistMap());
+
+            modelBuilder.Entity<IdentityRole>().HasData(
+                    new IdentityRole { Id = Guid.NewGuid().ToString(), Name = "User", NormalizedName = "USER" },
+                    new IdentityRole { Id = Guid.NewGuid().ToString(), Name = "Artist", NormalizedName = "ARTIST" }
+            );
         }
+
+
         public DbSet<Album> Albums { get; set; }
         public DbSet<Track> Tracks { get; set; }
         public DbSet<Playlist> Playlists { get; set; }

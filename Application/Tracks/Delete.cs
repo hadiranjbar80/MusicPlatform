@@ -8,8 +8,7 @@ namespace Application.Tracks
     {
         public class Command : IRequest<Result<Unit>>
         {
-            public string UserId { get; set; }
-            public int TrackId { get; set; }
+            public DeleteTrackDto TrackDto { get; set; }
         }
 
         public class Handler : IRequestHandler<Command, Result<Unit>>
@@ -22,10 +21,13 @@ namespace Application.Tracks
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                if (_context.Tracks.Any(x => x.Id == request.TrackId &&
-                    x.UserId == request.UserId))
+                if (_context.Tracks.Any(x => x.Id == request.TrackDto.TrackId &&
+                    x.UserId == request.TrackDto.UserId))
                 {
-                    var track = _context.Albums.FindAsync(request.TrackId);
+                    var track = await _context.Tracks.FindAsync(request.TrackDto.TrackId);
+
+                    File.Delete(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", "Attachment", track.Attachment));
+                    File.Delete(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", "Cover", track.Cover));
 
                     _context.Remove(track);
                     var result = await _context.SaveChangesAsync() > 0;
@@ -36,7 +38,7 @@ namespace Application.Tracks
                     return Result<Unit>.Success(Unit.Value);
                 }
 
-                return Result<Unit>.Failure("You dont have permission to do this action");
+                return Result<Unit>.Failure("No Track found");
             }
         }
     }

@@ -6,5 +6,6 @@ namespace Application.Playlists
     {
         public string Title { get; set; }
         public IFormFile Cover { get; set; }
+        public string UserId { get; set; }
     }
 }
