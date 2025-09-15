@@ -1,5 +1,6 @@
 using API.DTOs;
 using API.Services;
+using Application.Users;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -10,7 +11,7 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AccountController : ControllerBase
+    public class AccountController : BaseApiController
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
@@ -27,8 +28,6 @@ namespace API.Controllers
         [HttpPost("/Register")]
         public async Task<IActionResult> Register(RegisterDto register)
         {
-
-
             if (_signInManager.IsSignedIn(User))
                 return Ok();
 
@@ -69,11 +68,18 @@ namespace API.Controllers
             return Unauthorized();
         }
 
+        [HttpPost("/EditProfile")]
+        [Authorize]
+        public async Task<ActionResult> EditUserProfile(EditUserProfileDto userDto)
+        {
+            return HandleResult(await Mediator.Send(new EditProfile.Command { UserDto = userDto }));
+        }
+
         private UserDto CreateUserObject(AppUser user)
         {
             return new UserDto
             {
-                Image = "",
+                Image = user.UserImage,
                 Token = _tokenService.CreateToken(user),
                 Username = user.UserName
             };

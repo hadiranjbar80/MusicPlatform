@@ -36,8 +36,12 @@ namespace Application.Albums
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
+
                 if (request.Album.Cover.Length > 0)
                 {
+                    if (!request.Album.Cover.ContentType.StartsWith("image/"))
+                        return Result<Unit>.Failure("Only image files are allowed");
+
                     // Saving the album cover
                     var coverName = Untilities.UploadFile(request.Album.Cover,
                         Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", "Cover"));
@@ -57,7 +61,7 @@ namespace Application.Albums
 
                     return Result<Unit>.Success(Unit.Value);
                 }
-                
+
                 return Result<Unit>.Failure("Please choose a cover for album");
             }
         }

@@ -175,13 +175,13 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f217ebed-fbba-40cb-aa32-a1e00b6d545c",
+                            Id = "f71cb194-6fea-4a49-a1f0-36a559639603",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "4d69828d-9b60-49bc-b30c-fcdd285f220a",
+                            Id = "ac54bf31-082e-4ce5-9225-917807a1b580",
                             Name = "Artist",
                             NormalizedName = "ARTIST"
                         });
@@ -370,6 +370,9 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Models.AppUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("UserImage")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("AppUser");
                 });

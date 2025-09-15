@@ -1,5 +1,6 @@
 using Application.Core;
 using Domain.Models;
+using FluentValidation;
 using MediatR;
 using Persistence;
 
@@ -12,6 +13,14 @@ namespace Application.Playlists
             public CreatePlaylistDto Playlist { get; set; }
         }
 
+        public class CommandValidator : AbstractValidator<Command>
+        {
+            public CommandValidator()
+            {
+                RuleFor(x => x.Playlist).SetValidator(new PlaylistValidator());
+            }
+        }
+
         public class Handler : IRequestHandler<Command, Result<Unit>>
         {
             private readonly DataContext _context;
@@ -22,8 +31,12 @@ namespace Application.Playlists
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
+
                 if (request.Playlist.Cover.Length > 0)
                 {
+                    if (!request.Playlist.Cover.ContentType.StartsWith("image/"))
+                        return Result<Unit>.Failure("Only image files are allowed");
+
                     var coverName = Untilities.UploadFile(request.Playlist.Cover,
                         Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", "Cover"));
 

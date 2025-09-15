@@ -10,7 +10,7 @@ namespace Application.Core
                 .Replace("-", "").Substring(0, 5);
             var fileExtension = file.ContentType.Split("/").Last();
             var fileName = $"{fileId}.{fileExtension}";
-            
+
             using (var stream = new FileStream($"{filePath}/{fileName}", FileMode.Create))
             {
                 file.CopyTo(stream);

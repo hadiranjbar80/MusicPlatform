@@ -1,5 +1,6 @@
 using Application.Core;
 using Domain.Models;
+using FluentValidation;
 using MediatR;
 using Persistence;
 
@@ -10,6 +11,14 @@ namespace Application.Tracks
         public class Command : IRequest<Result<Unit>>
         {
             public CreateTrackDto Track { get; set; }
+        }
+
+        public class CommandValidator : AbstractValidator<Command>
+        {
+            public CommandValidator()
+            {
+                RuleFor(x => x.Track).SetValidator(new TrackValidator());
+            }
         }
 
         public class Handler : IRequestHandler<Command, Result<Unit>>
@@ -24,8 +33,17 @@ namespace Application.Tracks
             {
                 if (request.Track.Cover.Length > 0)
                 {
+                    if (!request.Track.Cover.ContentType.StartsWith("image/"))
+                        return Result<Unit>.Failure("Only image files are allowed");
+
                     if (request.Track.Attachment.Length > 0)
                     {
+                        if (!request.Track.Attachment.ContentType.StartsWith("audio/"))
+                            return Result<Unit>.Failure("Only audio files are allowed");
+
+                        if (request.Track.Attachment.Length > 50 * 1024 * 1024) // 50 MB
+                            return Result<Unit>.Failure("File is too large");
+
                         var coverName = Untilities.UploadFile(request.Track.Cover,
                             Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", "Cover"));
 
