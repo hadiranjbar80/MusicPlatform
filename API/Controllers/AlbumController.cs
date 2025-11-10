@@ -5,6 +5,11 @@ namespace API.Controllers
 {
     public class AlbumController : BaseApiController
     {
+        [HttpGet]
+        public async Task<IActionResult> GetAlbums()
+        {
+            return HandleResult(await Mediator.Send(new List.Query { }));
+        }
 
         [HttpPost]
         public async Task<IActionResult> CreateAlbum(CreateAlbumDto album)
