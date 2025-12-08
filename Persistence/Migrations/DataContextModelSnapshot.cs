@@ -63,7 +63,7 @@ namespace Persistence.Migrations
                             ReleaseDate = new DateOnly(2023, 11, 15),
                             Title = "Midnight Dreams",
                             Type = 2,
-                            UserId = "e57983a2-c13a-4e33-b661-f7726bcf9126"
+                            UserId = "406f9444-5f91-4c74-86c7-366f53f310fb"
                         },
                         new
                         {
@@ -72,7 +72,7 @@ namespace Persistence.Migrations
                             ReleaseDate = new DateOnly(2024, 2, 10),
                             Title = "Echoes of Silence",
                             Type = 0,
-                            UserId = "e57983a2-c13a-4e33-b661-f7726bcf9126"
+                            UserId = "406f9444-5f91-4c74-86c7-366f53f310fb"
                         },
                         new
                         {
@@ -81,7 +81,7 @@ namespace Persistence.Migrations
                             ReleaseDate = new DateOnly(2022, 8, 25),
                             Title = "Golden Horizon",
                             Type = 1,
-                            UserId = "e57983a2-c13a-4e33-b661-f7726bcf9126"
+                            UserId = "406f9444-5f91-4c74-86c7-366f53f310fb"
                         });
                 });
 
@@ -121,7 +121,7 @@ namespace Persistence.Migrations
                             Cover = "3bc09.jpeg",
                             CreationDate = new DateOnly(2024, 4, 15),
                             Title = "Chill Vibes",
-                            UserId = "e57983a2-c13a-4e33-b661-f7726bcf9126"
+                            UserId = "406f9444-5f91-4c74-86c7-366f53f310fb"
                         },
                         new
                         {
@@ -129,7 +129,7 @@ namespace Persistence.Migrations
                             Cover = "3bc09.jpeg",
                             CreationDate = new DateOnly(2023, 12, 1),
                             Title = "Workout Pump",
-                            UserId = "e57983a2-c13a-4e33-b661-f7726bcf9126"
+                            UserId = "406f9444-5f91-4c74-86c7-366f53f310fb"
                         },
                         new
                         {
@@ -137,7 +137,7 @@ namespace Persistence.Migrations
                             Cover = "3bc09.jpeg",
                             CreationDate = new DateOnly(2022, 9, 20),
                             Title = "Acoustic Nights",
-                            UserId = "e57983a2-c13a-4e33-b661-f7726bcf9126"
+                            UserId = "406f9444-5f91-4c74-86c7-366f53f310fb"
                         });
                 });
 
@@ -196,7 +196,7 @@ namespace Persistence.Migrations
                             Plays = 1200,
                             ReleaseDate = new DateOnly(2023, 11, 15),
                             Title = "Into the Night",
-                            UserId = "e57983a2-c13a-4e33-b661-f7726bcf9126"
+                            UserId = "406f9444-5f91-4c74-86c7-366f53f310fb"
                         },
                         new
                         {
@@ -208,7 +208,7 @@ namespace Persistence.Migrations
                             Plays = 850,
                             ReleaseDate = new DateOnly(2023, 11, 15),
                             Title = "Moonlight Drive",
-                            UserId = "e57983a2-c13a-4e33-b661-f7726bcf9126"
+                            UserId = "406f9444-5f91-4c74-86c7-366f53f310fb"
                         },
                         new
                         {
@@ -220,7 +220,7 @@ namespace Persistence.Migrations
                             Plays = 430,
                             ReleaseDate = new DateOnly(2024, 2, 10),
                             Title = "Silent Echo",
-                            UserId = "e57983a2-c13a-4e33-b661-f7726bcf9126"
+                            UserId = "406f9444-5f91-4c74-86c7-366f53f310fb"
                         },
                         new
                         {
@@ -232,7 +232,7 @@ namespace Persistence.Migrations
                             Plays = 2300,
                             ReleaseDate = new DateOnly(2022, 8, 25),
                             Title = "Golden Hour",
-                            UserId = "e57983a2-c13a-4e33-b661-f7726bcf9126"
+                            UserId = "406f9444-5f91-4c74-86c7-366f53f310fb"
                         });
                 });
 
@@ -280,13 +280,13 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0242ab20-d778-47b8-ae41-83b688795521",
+                            Id = "190d011b-a904-48ce-9ae0-920de3c64126",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "da501de5-d560-47e3-ae31-81dc337ad624",
+                            Id = "c027f5af-c655-4148-8feb-f534e4428ea6",
                             Name = "Artist",
                             NormalizedName = "ARTIST"
                         });

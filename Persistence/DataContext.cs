@@ -20,18 +20,18 @@ namespace Persistence
             modelBuilder.ApplyConfiguration(new PlaylistMap());
             modelBuilder.ApplyConfiguration(new TrackPlaylistMap());
 
-
             // Seeding Data
             modelBuilder.Entity<IdentityRole>().HasData(
                     new IdentityRole { Id = Guid.NewGuid().ToString(), Name = "User", NormalizedName = "USER" },
                     new IdentityRole { Id = Guid.NewGuid().ToString(), Name = "Artist", NormalizedName = "ARTIST" }
             );
 
+
             modelBuilder.Entity<Album>().HasData(
                 new Album
                 {
                     Id = 1,
-                    UserId = "e57983a2-c13a-4e33-b661-f7726bcf9126",
+                    UserId = "406f9444-5f91-4c74-86c7-366f53f310fb",
                     Title = "Midnight Dreams",
                     Cover = "3bc09.jpeg",
                     Type = AlbumType.Album,
@@ -40,7 +40,7 @@ namespace Persistence
                 new Album
                 {
                     Id = 2,
-                    UserId = "e57983a2-c13a-4e33-b661-f7726bcf9126",
+                    UserId = "406f9444-5f91-4c74-86c7-366f53f310fb",
                     Title = "Echoes of Silence",
                     Cover = "3bc09.jpeg",
                     Type = AlbumType.Single,
@@ -49,7 +49,7 @@ namespace Persistence
                 new Album
                 {
                     Id = 3,
-                    UserId = "e57983a2-c13a-4e33-b661-f7726bcf9126",
+                    UserId = "406f9444-5f91-4c74-86c7-366f53f310fb",
                     Title = "Golden Horizon",
                     Cover = "3bc09.jpeg",
                     Type = AlbumType.EP,
@@ -61,7 +61,7 @@ namespace Persistence
                 new Playlist
                 {
                     Id = 1,
-                    UserId = "e57983a2-c13a-4e33-b661-f7726bcf9126",
+                    UserId = "406f9444-5f91-4c74-86c7-366f53f310fb",
                     Title = "Chill Vibes",
                     Cover = "3bc09.jpeg",
                     CreationDate = DateOnly.Parse("2024-04-15")
@@ -69,7 +69,7 @@ namespace Persistence
                 new Playlist
                 {
                     Id = 2,
-                    UserId = "e57983a2-c13a-4e33-b661-f7726bcf9126",
+                    UserId = "406f9444-5f91-4c74-86c7-366f53f310fb",
                     Title = "Workout Pump",
                     Cover = "3bc09.jpeg",
                     CreationDate = DateOnly.Parse("2023-12-01")
@@ -77,7 +77,7 @@ namespace Persistence
                 new Playlist
                 {
                     Id = 3,
-                    UserId = "e57983a2-c13a-4e33-b661-f7726bcf9126",
+                    UserId = "406f9444-5f91-4c74-86c7-366f53f310fb",
                     Title = "Acoustic Nights",
                     Cover = "3bc09.jpeg",
                     CreationDate = DateOnly.Parse("2022-09-20")
@@ -89,7 +89,7 @@ namespace Persistence
                 {
                     Id = 1,
                     AlbumId = 1, 
-                    UserId = "e57983a2-c13a-4e33-b661-f7726bcf9126",
+                    UserId = "406f9444-5f91-4c74-86c7-366f53f310fb",
                     Title = "Into the Night",
                     Cover = "3bc09.jpeg",
                     Attachment = "0f067.mpeg",
@@ -101,7 +101,7 @@ namespace Persistence
                 {
                     Id = 2,
                     AlbumId = 1,
-                    UserId = "e57983a2-c13a-4e33-b661-f7726bcf9126",
+                    UserId = "406f9444-5f91-4c74-86c7-366f53f310fb",
                     Title = "Moonlight Drive",
                     Cover = "3bc09.jpeg",
                     Attachment = "0f067.mpeg",
@@ -113,7 +113,7 @@ namespace Persistence
                 {
                     Id = 3,
                     AlbumId = 2, 
-                    UserId = "e57983a2-c13a-4e33-b661-f7726bcf9126", 
+                    UserId = "406f9444-5f91-4c74-86c7-366f53f310fb", 
                     Title = "Silent Echo",
                     Cover = "3bc09.jpeg",
                     Attachment = "0f067.mpeg",
@@ -125,7 +125,7 @@ namespace Persistence
                 {
                     Id = 4,
                     AlbumId = 3, 
-                    UserId = "e57983a2-c13a-4e33-b661-f7726bcf9126",
+                    UserId = "406f9444-5f91-4c74-86c7-366f53f310fb",
                     Title = "Golden Hour",
                     Cover = "3bc09.jpeg",
                     Attachment = "0f067.mpeg",
@@ -134,6 +134,8 @@ namespace Persistence
                     Plays = 2300
                 }
             );
+
+            
         }
 
 

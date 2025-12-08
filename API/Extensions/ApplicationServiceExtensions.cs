@@ -24,6 +24,18 @@ namespace API.Extensions
                 opt.UseSqlServer(config.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("CorsPolicy", poslicy =>
+                {
+                    poslicy
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials()
+                        .WithOrigins("http://localhost:3000");
+                });
+            });
+
             services.AddMediatR(typeof(Create.Handler));
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddFluentValidationAutoValidation();

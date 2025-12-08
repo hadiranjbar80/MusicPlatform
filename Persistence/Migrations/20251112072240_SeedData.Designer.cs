@@ -12,8 +12,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250820053929_InitDatabaseAgain")]
-    partial class InitDatabaseAgain
+    [Migration("20251112072240_SeedData")]
+    partial class SeedData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,6 +57,35 @@ namespace Persistence.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Albums");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Cover = "3bc09.jpeg",
+                            ReleaseDate = new DateOnly(2023, 11, 15),
+                            Title = "Midnight Dreams",
+                            Type = 2,
+                            UserId = "406f9444-5f91-4c74-86c7-366f53f310fb"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Cover = "3bc09.jpeg",
+                            ReleaseDate = new DateOnly(2024, 2, 10),
+                            Title = "Echoes of Silence",
+                            Type = 0,
+                            UserId = "406f9444-5f91-4c74-86c7-366f53f310fb"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Cover = "3bc09.jpeg",
+                            ReleaseDate = new DateOnly(2022, 8, 25),
+                            Title = "Golden Horizon",
+                            Type = 1,
+                            UserId = "406f9444-5f91-4c74-86c7-366f53f310fb"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Models.Playlist", b =>
@@ -87,6 +116,32 @@ namespace Persistence.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Playlists");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Cover = "3bc09.jpeg",
+                            CreationDate = new DateOnly(2024, 4, 15),
+                            Title = "Chill Vibes",
+                            UserId = "406f9444-5f91-4c74-86c7-366f53f310fb"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Cover = "3bc09.jpeg",
+                            CreationDate = new DateOnly(2023, 12, 1),
+                            Title = "Workout Pump",
+                            UserId = "406f9444-5f91-4c74-86c7-366f53f310fb"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Cover = "3bc09.jpeg",
+                            CreationDate = new DateOnly(2022, 9, 20),
+                            Title = "Acoustic Nights",
+                            UserId = "406f9444-5f91-4c74-86c7-366f53f310fb"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Models.Track", b =>
@@ -132,6 +187,56 @@ namespace Persistence.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Tracks");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AlbumId = 1,
+                            Attachment = "0f067.mpeg",
+                            Cover = "3bc09.jpeg",
+                            Duration = new TimeOnly(0, 3, 45),
+                            Plays = 1200,
+                            ReleaseDate = new DateOnly(2023, 11, 15),
+                            Title = "Into the Night",
+                            UserId = "406f9444-5f91-4c74-86c7-366f53f310fb"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AlbumId = 1,
+                            Attachment = "0f067.mpeg",
+                            Cover = "3bc09.jpeg",
+                            Duration = new TimeOnly(0, 4, 12),
+                            Plays = 850,
+                            ReleaseDate = new DateOnly(2023, 11, 15),
+                            Title = "Moonlight Drive",
+                            UserId = "406f9444-5f91-4c74-86c7-366f53f310fb"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AlbumId = 2,
+                            Attachment = "0f067.mpeg",
+                            Cover = "3bc09.jpeg",
+                            Duration = new TimeOnly(0, 5, 5),
+                            Plays = 430,
+                            ReleaseDate = new DateOnly(2024, 2, 10),
+                            Title = "Silent Echo",
+                            UserId = "406f9444-5f91-4c74-86c7-366f53f310fb"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AlbumId = 3,
+                            Attachment = "0f067.mpeg",
+                            Cover = "3bc09.jpeg",
+                            Duration = new TimeOnly(0, 2, 58),
+                            Plays = 2300,
+                            ReleaseDate = new DateOnly(2022, 8, 25),
+                            Title = "Golden Hour",
+                            UserId = "406f9444-5f91-4c74-86c7-366f53f310fb"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Models.TrackPlaylist", b =>
@@ -178,13 +283,13 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f217ebed-fbba-40cb-aa32-a1e00b6d545c",
+                            Id = "190d011b-a904-48ce-9ae0-920de3c64126",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "4d69828d-9b60-49bc-b30c-fcdd285f220a",
+                            Id = "c027f5af-c655-4148-8feb-f534e4428ea6",
                             Name = "Artist",
                             NormalizedName = "ARTIST"
                         });
@@ -373,6 +478,9 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Models.AppUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("UserImage")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("AppUser");
                 });

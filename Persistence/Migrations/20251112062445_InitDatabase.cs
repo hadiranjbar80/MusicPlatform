@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class InitDatabaseAgain : Migration
+    public partial class InitDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -33,6 +33,7 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
+                    UserImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -262,8 +263,8 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "4d69828d-9b60-49bc-b30c-fcdd285f220a", null, "Artist", "ARTIST" },
-                    { "f217ebed-fbba-40cb-aa32-a1e00b6d545c", null, "User", "USER" }
+                    { "775c0a02-2f5b-46d2-9737-29c05aa19205", null, "Artist", "ARTIST" },
+                    { "bedc949a-0e4b-4bfe-b20d-61caac0ec2ac", null, "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(

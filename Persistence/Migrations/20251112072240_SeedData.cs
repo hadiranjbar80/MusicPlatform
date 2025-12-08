@@ -16,21 +16,21 @@ namespace Persistence.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "ac54bf31-082e-4ce5-9225-917807a1b580");
+                keyValue: "775c0a02-2f5b-46d2-9737-29c05aa19205");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "f71cb194-6fea-4a49-a1f0-36a559639603");
+                keyValue: "bedc949a-0e4b-4bfe-b20d-61caac0ec2ac");
 
             migrationBuilder.InsertData(
                 table: "Albums",
                 columns: new[] { "Id", "Cover", "ReleaseDate", "Title", "Type", "UserId" },
                 values: new object[,]
                 {
-                    { 1, "3bc09.jpeg", new DateOnly(2023, 11, 15), "Midnight Dreams", 2, "e57983a2-c13a-4e33-b661-f7726bcf9126" },
-                    { 2, "3bc09.jpeg", new DateOnly(2024, 2, 10), "Echoes of Silence", 0, "e57983a2-c13a-4e33-b661-f7726bcf9126" },
-                    { 3, "3bc09.jpeg", new DateOnly(2022, 8, 25), "Golden Horizon", 1, "e57983a2-c13a-4e33-b661-f7726bcf9126" }
+                    { 1, "3bc09.jpeg", new DateOnly(2023, 11, 15), "Midnight Dreams", 2, "406f9444-5f91-4c74-86c7-366f53f310fb" },
+                    { 2, "3bc09.jpeg", new DateOnly(2024, 2, 10), "Echoes of Silence", 0, "406f9444-5f91-4c74-86c7-366f53f310fb" },
+                    { 3, "3bc09.jpeg", new DateOnly(2022, 8, 25), "Golden Horizon", 1, "406f9444-5f91-4c74-86c7-366f53f310fb" }
                 });
 
             migrationBuilder.InsertData(
@@ -38,8 +38,8 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "0242ab20-d778-47b8-ae41-83b688795521", null, "User", "USER" },
-                    { "da501de5-d560-47e3-ae31-81dc337ad624", null, "Artist", "ARTIST" }
+                    { "190d011b-a904-48ce-9ae0-920de3c64126", null, "User", "USER" },
+                    { "c027f5af-c655-4148-8feb-f534e4428ea6", null, "Artist", "ARTIST" }
                 });
 
             migrationBuilder.InsertData(
@@ -47,9 +47,9 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "Cover", "CreationDate", "Title", "UserId" },
                 values: new object[,]
                 {
-                    { 1, "3bc09.jpeg", new DateOnly(2024, 4, 15), "Chill Vibes", "e57983a2-c13a-4e33-b661-f7726bcf9126" },
-                    { 2, "3bc09.jpeg", new DateOnly(2023, 12, 1), "Workout Pump", "e57983a2-c13a-4e33-b661-f7726bcf9126" },
-                    { 3, "3bc09.jpeg", new DateOnly(2022, 9, 20), "Acoustic Nights", "e57983a2-c13a-4e33-b661-f7726bcf9126" }
+                    { 1, "3bc09.jpeg", new DateOnly(2024, 4, 15), "Chill Vibes", "406f9444-5f91-4c74-86c7-366f53f310fb" },
+                    { 2, "3bc09.jpeg", new DateOnly(2023, 12, 1), "Workout Pump", "406f9444-5f91-4c74-86c7-366f53f310fb" },
+                    { 3, "3bc09.jpeg", new DateOnly(2022, 9, 20), "Acoustic Nights", "406f9444-5f91-4c74-86c7-366f53f310fb" }
                 });
 
             migrationBuilder.InsertData(
@@ -57,10 +57,10 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "AlbumId", "Attachment", "Cover", "Duration", "Plays", "ReleaseDate", "Title", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 1, "0f067.mpeg", "3bc09.jpeg", new TimeOnly(0, 3, 45), 1200, new DateOnly(2023, 11, 15), "Into the Night", "e57983a2-c13a-4e33-b661-f7726bcf9126" },
-                    { 2, 1, "0f067.mpeg", "3bc09.jpeg", new TimeOnly(0, 4, 12), 850, new DateOnly(2023, 11, 15), "Moonlight Drive", "e57983a2-c13a-4e33-b661-f7726bcf9126" },
-                    { 3, 2, "0f067.mpeg", "3bc09.jpeg", new TimeOnly(0, 5, 5), 430, new DateOnly(2024, 2, 10), "Silent Echo", "e57983a2-c13a-4e33-b661-f7726bcf9126" },
-                    { 4, 3, "0f067.mpeg", "3bc09.jpeg", new TimeOnly(0, 2, 58), 2300, new DateOnly(2022, 8, 25), "Golden Hour", "e57983a2-c13a-4e33-b661-f7726bcf9126" }
+                    { 1, 1, "0f067.mpeg", "3bc09.jpeg", new TimeOnly(0, 3, 45), 1200, new DateOnly(2023, 11, 15), "Into the Night", "406f9444-5f91-4c74-86c7-366f53f310fb" },
+                    { 2, 1, "0f067.mpeg", "3bc09.jpeg", new TimeOnly(0, 4, 12), 850, new DateOnly(2023, 11, 15), "Moonlight Drive", "406f9444-5f91-4c74-86c7-366f53f310fb" },
+                    { 3, 2, "0f067.mpeg", "3bc09.jpeg", new TimeOnly(0, 5, 5), 430, new DateOnly(2024, 2, 10), "Silent Echo", "406f9444-5f91-4c74-86c7-366f53f310fb" },
+                    { 4, 3, "0f067.mpeg", "3bc09.jpeg", new TimeOnly(0, 2, 58), 2300, new DateOnly(2022, 8, 25), "Golden Hour", "406f9444-5f91-4c74-86c7-366f53f310fb" }
                 });
         }
 
@@ -70,12 +70,12 @@ namespace Persistence.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "0242ab20-d778-47b8-ae41-83b688795521");
+                keyValue: "190d011b-a904-48ce-9ae0-920de3c64126");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "da501de5-d560-47e3-ae31-81dc337ad624");
+                keyValue: "c027f5af-c655-4148-8feb-f534e4428ea6");
 
             migrationBuilder.DeleteData(
                 table: "Playlists",
@@ -132,8 +132,8 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "ac54bf31-082e-4ce5-9225-917807a1b580", null, "Artist", "ARTIST" },
-                    { "f71cb194-6fea-4a49-a1f0-36a559639603", null, "User", "USER" }
+                    { "775c0a02-2f5b-46d2-9737-29c05aa19205", null, "Artist", "ARTIST" },
+                    { "bedc949a-0e4b-4bfe-b20d-61caac0ec2ac", null, "User", "USER" }
                 });
         }
     }

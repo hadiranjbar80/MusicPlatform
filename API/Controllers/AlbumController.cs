@@ -1,3 +1,4 @@
+using System.Reflection.Metadata;
 using Application.Albums;
 using Microsoft.AspNetCore.Mvc;
 
@@ -5,6 +6,11 @@ namespace API.Controllers
 {
     public class AlbumController : BaseApiController
     {
+
+        public async Task<ActionResult> GetAlbums()
+        {
+            return HandleResult(await Mediator.Send(new List.Query { }));
+        }
 
         [HttpPost]
         public async Task<IActionResult> CreateAlbum(CreateAlbumDto album)

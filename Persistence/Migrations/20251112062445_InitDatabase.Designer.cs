@@ -12,8 +12,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250915074756_UserImage")]
-    partial class UserImage
+    [Migration("20251112062445_InitDatabase")]
+    partial class InitDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -178,13 +178,13 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f71cb194-6fea-4a49-a1f0-36a559639603",
+                            Id = "bedc949a-0e4b-4bfe-b20d-61caac0ec2ac",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "ac54bf31-082e-4ce5-9225-917807a1b580",
+                            Id = "775c0a02-2f5b-46d2-9737-29c05aa19205",
                             Name = "Artist",
                             NormalizedName = "ARTIST"
                         });
